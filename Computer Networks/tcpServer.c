@@ -13,10 +13,10 @@
 #include<sys/socket.h>
 #include<time.h>
 
-#define MAX_TEXT 1400
+#define MAX_TEXT 5600
 
 struct MSG{
-    int m_txt[MAX_TEXT];
+    int m_txt[1400];
     int m_seq;
     int m_total_packet;
     int m_size;
@@ -61,7 +61,7 @@ int main()
         c_len = sizeof(c_address);
         rec = recvfrom(sock1,(void*)&m_data,sizeof(struct MSG),0,(struct sockaddr*)&c_address,&c_len);
         bzero(buf,sizeof(buf));
-        memcpy(buf,m_data.m_txt,sizeof(m_data.m_txt));
+        memcpy(buf, m_data.m_txt, sizeof(m_data.m_txt));
         i = m_data.m_seq;
         printf("Sequence Number at Receiver=%d\n",i);
         write(f2,buf,m_data.m_size);
